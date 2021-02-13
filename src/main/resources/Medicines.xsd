@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns:tns="http://www.example.com/medicines"
+        version="1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.example.com/medicines"
+        elementFormDefault="qualified">
+
+    <element name="medicines">
+        <complexType>
+            <sequence>
+                <element ref="tns:medicine"
+                         minOccurs="1"
+                         maxOccurs="unbounded"
+                />
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Medicine">
+        <sequence>
+            <element name="pharmaName">
+                <simpleType>
+                    <restriction base="string">
+                        <minLength value="2"/>
+                        <maxLength value="255"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="price">
+                <simpleType>
+                    <restriction base="double">
+                        <minInclusive value="0"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+        <attribute name="id" type="ID" use="required"/>
+        <attribute name="name" use="required">
+            <simpleType>
+                <restriction base="string">
+                    <minLength value="3"/>
+                    <maxLength value="255"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+        <!--        Added just to test optional-->
+        <attribute name="medicineGroup" default="antibiotic">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="antibiotic"/>
+                    <enumeration value="bud"/>
+                    <enumeration value="painkiller"/>
+                    <enumeration value="vitamin"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+
+    <complexType name="Pills">
+        <complexContent>
+            <extension base="tns:Medicine">
+                <sequence>
+                    <element name="dosage" type="double"/>
+                </sequence>
+                <attribute name="quantity" type="positiveInteger" default="1"/>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <complexType name="Drops">
+        <complexContent>
+            <extension base="tns:Medicine">
+                <sequence>
+                    <element name="concentration" type="double"/>
+                    <element name="volumeMilligrams" type="double"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <element name="medicine" type="tns:Medicine" abstract="true"/>
+    <element name="pills" type="tns:Pills" substitutionGroup="tns:medicine"/>
+    <element name="drops" type="tns:Drops" substitutionGroup="tns:medicine"/>
+</schema>

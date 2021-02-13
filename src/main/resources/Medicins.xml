@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<medicines
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.example.com/medicines"
+        xsi:schemaLocation="http://www.example.com/medicines Medicines.xsd">
+    <pills id="a" name="Aevit">
+        <pharmaName>Name</pharmaName>
+        <price>1</price>
+        <dosage>1</dosage>
+    </pills>
+    <drops id="b" name="Hormones" medicineGroup="bud">
+        <pharmaName>BelFarm</pharmaName>
+        <price>5.0</price>
+        <concentration>0.02</concentration>
+        <volumeMilligrams>50</volumeMilligrams>
+    </drops>
+    <drops id="c" name="Anti-virus drops">
+        <pharmaName>GermFarm</pharmaName>
+        <price>34.0</price>
+        <concentration>0.03</concentration>
+        <volumeMilligrams>30</volumeMilligrams>
+    </drops>
+    <pills id="d" name="Mezim" medicineGroup="bud" quantity="100">
+        <pharmaName>RosFarm</pharmaName>
+        <price>10.5</price>
+        <dosage>100</dosage>
+    </pills>
+    <pills id="e" name="Folic acid" quantity="50" medicineGroup="vitamin">
+        <pharmaName>GermFarm</pharmaName>
+        <price>0.78</price>
+        <dosage>30</dosage>
+    </pills>
+    <pills id="f" name="Valtas" quantity="10" medicineGroup="painkiller">
+        <pharmaName>GermFarm</pharmaName>
+        <price>76</price>
+        <dosage>250</dosage>
+    </pills>
+</medicines>
