@@ -16,13 +16,12 @@ public abstract class ParserTest {
 
     private final static String SINGLE_ELEMENT_FILE = "src/test/resources/valid_single.xml";
     private final static String MULTI_ELEMENTS_FILE = "src/test/resources/valid_multiple.xml";
+
+    private final static Medicine FIRST_MEDICINE = new Pills("BelFarm", "Aevit", MedicineGroup.ANTIBIOTIC, 1, 1, "ID-0");
+    private final static Medicine SECOND_MEDICINE = new Drops("BelFarm", "Hormones", MedicineGroup.BUD, 5.0, 50, "ID-1");
+    private final static Medicine THIRD_MEDICINE = new Drops("GermFarm", "Some drops", MedicineGroup.ANTIBIOTIC, 5.0, 50, "ID-2");
+
     private final Parser parser = getParser();
-    private final Medicine FIRST_MEDICINE =
-            new Pills("BelFarm", "Aevit", MedicineGroup.ANTIBIOTIC, 1, 1, "ID-0");
-    private final Medicine SECOND_MEDICINE =
-            new Drops("BelFarm", "Hormones", MedicineGroup.BUD, 5.0, 50, "ID-1");
-    private final Medicine THIRD_MEDICINE =
-            new Drops("GermFarm", "Some drops", MedicineGroup.ANTIBIOTIC, 5.0, 50, "ID-2");
 
     protected abstract Parser getParser();
 
