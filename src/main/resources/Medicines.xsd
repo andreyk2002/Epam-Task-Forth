@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<schema xmlns:tns="http://www.example.com/medicines"
+<schema xmlns:tns="http://www.forth.task.epam.com/entities"
         version="1.0"
         xmlns="http://www.w3.org/2001/XMLSchema"
-        targetNamespace="http://www.example.com/medicines"
+        targetNamespace="http://www.forth.task.epam.com/entities"
         elementFormDefault="qualified">
 
     <element name="medicines">
         <complexType>
             <sequence>
                 <element ref="tns:medicine"
-                         minOccurs="1"
                          maxOccurs="unbounded"
                 />
             </sequence>
@@ -17,7 +16,7 @@
     </element>
     <complexType name="Medicine">
         <sequence>
-            <element name="pharmaName">
+            <element name="pharma">
                 <simpleType>
                     <restriction base="string">
                         <minLength value="2"/>
@@ -43,25 +42,21 @@
             </simpleType>
         </attribute>
         <!--        Added just to test optional-->
-        <attribute name="medicineGroup" default="antibiotic">
-            <simpleType>
-                <restriction base="string">
-                    <enumeration value="antibiotic"/>
-                    <enumeration value="bud"/>
-                    <enumeration value="painkiller"/>
-                    <enumeration value="vitamin"/>
-                </restriction>
-            </simpleType>
+        <attribute name="group" type="tns:MedicineGroup" default="antibiotic">
         </attribute>
     </complexType>
-
+    <simpleType name="MedicineGroup">
+        <restriction base="string">
+            <enumeration value="antibiotic"/>
+            <enumeration value="bud"/>
+            <enumeration value="painkiller"/>
+            <enumeration value="vitamin"/>
+        </restriction>
+    </simpleType>
     <complexType name="Pills">
         <complexContent>
             <extension base="tns:Medicine">
-                <sequence>
-                    <element name="dosage" type="double"/>
-                </sequence>
-                <attribute name="quantity" type="positiveInteger" default="1"/>
+                <attribute name="quantity" type="positiveInteger" use="required"/>
             </extension>
         </complexContent>
     </complexType>
@@ -70,8 +65,7 @@
         <complexContent>
             <extension base="tns:Medicine">
                 <sequence>
-                    <element name="concentration" type="double"/>
-                    <element name="volumeMilligrams" type="double"/>
+                    <element name="volume-milligrams" type="double"/>
                 </sequence>
             </extension>
         </complexContent>

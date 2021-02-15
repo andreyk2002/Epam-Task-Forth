@@ -2,38 +2,33 @@
 
 <medicines
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://www.example.com/medicines"
-        xsi:schemaLocation="http://www.example.com/medicines Medicines.xsd">
-    <pills id="a" name="Aevit">
-        <pharmaName>Name</pharmaName>
+        xmlns="http://www.forth.task.epam.com/entities"
+        xsi:schemaLocation="http://www.forth.task.epam.com/entities Medicines.xsd">
+    <pills id="ID-0" name="Aevit" quantity="1">
+        <pharma>Name</pharma>
         <price>1</price>
-        <dosage>1</dosage>
     </pills>
-    <drops id="b" name="Hormones" medicineGroup="bud">
-        <pharmaName>BelFarm</pharmaName>
+
+    <drops id="ID-1" name="Hormones" group="bud">
+        <pharma>BelFarm</pharma>
         <price>5.0</price>
-        <concentration>0.02</concentration>
-        <volumeMilligrams>50</volumeMilligrams>
+        <volume-milligrams>50</volume-milligrams>
     </drops>
-    <drops id="c" name="Anti-virus drops">
-        <pharmaName>GermFarm</pharmaName>
-        <price>34.0</price>
-        <concentration>0.03</concentration>
-        <volumeMilligrams>30</volumeMilligrams>
+    <drops id="ID-2" name="Some droops">
+        <pharma>GermFarm</pharma>
+        <price>5.0</price>
+        <volume-milligrams>50</volume-milligrams>
     </drops>
-    <pills id="d" name="Mezim" medicineGroup="bud" quantity="100">
-        <pharmaName>RosFarm</pharmaName>
+    <pills id="ID-3" name="Mezim" group="bud" quantity="100">
+        <pharma>RosFarm</pharma>
         <price>10.5</price>
-        <dosage>100</dosage>
     </pills>
-    <pills id="e" name="Folic acid" quantity="50" medicineGroup="vitamin">
-        <pharmaName>GermFarm</pharmaName>
+    <pills id="ID-4" name="Folic acid" quantity="50" group="vitamin">
+        <pharma>GermFarm</pharma>
         <price>0.78</price>
-        <dosage>30</dosage>
     </pills>
-    <pills id="f" name="Valtas" quantity="10" medicineGroup="painkiller">
-        <pharmaName>GermFarm</pharmaName>
+    <pills id="ID-5" name="Valtas" quantity="10" group="painkiller">
+        <pharma>GermFarm</pharma>
         <price>76</price>
-        <dosage>250</dosage>
     </pills>
 </medicines>

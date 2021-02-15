@@ -1,24 +1,36 @@
 package com.epam.task.forth.entities;
 
-public class Drops extends Medicine {
-    private double volumeMilligrams;
-    private double concentration;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
-    public Drops() {
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Drops", propOrder = {
+        "volumeMilligrams"
+})
+
+public class Drops extends Medicine {
+
+    @XmlElement(name = "volume-milligrams")
+    private double volumeMilligrams;
+
+    public Drops(String pharma, String name, MedicineGroup group, double price, double volumeMilligrams, String id) {
+        super(pharma, price, id, name, group);
+        this.volumeMilligrams = volumeMilligrams;
     }
 
-    public Drops(String pharmaName, String name, MedicineGroup group, double price, double volumeMilligrams, double concentration) {
-        super(pharmaName, name, group, price);
-        this.volumeMilligrams = volumeMilligrams;
-        this.concentration = concentration;
+    public Drops() {
+
     }
 
     public double getVolumeMilligrams() {
         return volumeMilligrams;
     }
 
-    public double getConcentration() {
-        return concentration;
+
+    public void setVolumeMilligrams(double value) {
+        this.volumeMilligrams = value;
     }
 
     @Override
@@ -32,12 +44,10 @@ public class Drops extends Medicine {
         if (!super.equals(o)) {
             return false;
         }
+
         Drops drops = (Drops) o;
 
-        if (Double.compare(drops.volumeMilligrams, volumeMilligrams) != 0) {
-            return false;
-        }
-        return Double.compare(drops.concentration, concentration) == 0;
+        return Double.compare(drops.volumeMilligrams, volumeMilligrams) == 0;
     }
 
     @Override
@@ -45,8 +55,6 @@ public class Drops extends Medicine {
         int result = super.hashCode();
         long temp;
         temp = Double.doubleToLongBits(volumeMilligrams);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(concentration);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }

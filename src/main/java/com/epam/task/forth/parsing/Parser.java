@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface Parser {
 
-    List<Medicine> parse(String file);
+    List<Medicine> parse(String file) throws ParserException;
 }

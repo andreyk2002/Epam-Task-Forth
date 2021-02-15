@@ -3,7 +3,7 @@ package com.epam.task.forth.parsing.factory;
 import com.epam.task.forth.parsing.DomParser;
 import com.epam.task.forth.parsing.JaxbParser;
 import com.epam.task.forth.parsing.Parser;
-import com.epam.task.forth.parsing.SaxParser;
+import com.epam.task.forth.parsing.sax.SaxParser;
 
 public class ParserFactory {
 

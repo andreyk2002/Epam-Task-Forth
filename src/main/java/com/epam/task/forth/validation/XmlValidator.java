@@ -22,18 +22,18 @@ public class XmlValidator {
         this.xsdFile = xsdFile;
     }
 
-    public boolean isValid(String xmlPath) throws ValidatorException {
-        String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
-        SchemaFactory schemaFactory = SchemaFactory.newInstance(language);
+    public boolean isValid(String filename) throws ValidatorException {
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         try {
             File schemeFile = new File(xsdFile);
             Schema schema = schemaFactory.newSchema(schemeFile);
             Validator validator = schema.newValidator();
-            Source xmlToValidate = new StreamSource(xmlPath);
+            Source xmlToValidate = new StreamSource(filename);
             validator.validate(xmlToValidate);
         } catch (SAXException e) {
             //If file is invalid log
-            LOGGER.warn(e.getMessage(), e);
+            LOGGER.warn("Validation of file" + filename + "failed" +
+                    e.getMessage(), e);
             return false;
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);

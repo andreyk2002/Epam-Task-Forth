@@ -12,11 +12,13 @@ public class XmlValidatorTest {
     private static final String WRONG_TAGS_ORDER_FILE = "src/test/resources/wrong_order.xml";
     private static final String WRONG_TAGS_VALUES_FILE = "src/test/resources/wrong_tags.xml";
     private static final String WRONG_ATTRIBUTES_VALUES_FILE = "src/test/resources/wrong_attributes.xml";
+    private static final String XSD_FILE = "src/main/resources/Medicines.xsd";
 
-    private final XmlValidator validator = new XmlValidator("src/main/resources/Medicines.xsd");
+    private final XmlValidator validator = new XmlValidator(XSD_FILE);
 
     @Test
     public void testValidateShouldValidateWhenFileIsCorrect() throws ValidatorException {
+
         //when
         boolean result = validator.isValid(CORRECT_FILE);
         //then

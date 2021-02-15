@@ -1,25 +1,34 @@
 package com.epam.task.forth.entities;
 
+import javax.xml.bind.annotation.*;
+import java.util.Objects;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Pills")
 public class Pills extends Medicine {
 
-    private int quantity;
-    private double dosageMilligrams;
+    @XmlAttribute(required = true)
+    @XmlSchemaType(name = "positiveInteger")
+    private Integer quantity;
+
+
+    public Pills(String pharma, String name, MedicineGroup group, double price, Integer quantity, String id) {
+        super(pharma, price, id, name, group);
+        this.quantity = quantity;
+    }
 
     public Pills() {
+
     }
 
-    public Pills(String pharmaName, String name, MedicineGroup group, double price, int quantity, double dosageMilligrams) {
-        super(pharmaName, name, group, price);
-        this.quantity = quantity;
-        this.dosageMilligrams = dosageMilligrams;
-    }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public double getDosageMilligrams() {
-        return dosageMilligrams;
+
+    public void setQuantity(Integer value) {
+        this.quantity = value;
     }
 
     @Override
@@ -33,19 +42,16 @@ public class Pills extends Medicine {
         if (!super.equals(o)) {
             return false;
         }
+
         Pills pills = (Pills) o;
 
-        if (quantity != pills.quantity) return false;
-        return Double.compare(pills.dosageMilligrams, dosageMilligrams) == 0;
+        return Objects.equals(quantity, pills.quantity);
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        long temp;
-        result = 31 * result + quantity;
-        temp = Double.doubleToLongBits(dosageMilligrams);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
         return result;
     }
 }
