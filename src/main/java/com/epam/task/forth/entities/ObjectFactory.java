@@ -33,19 +33,30 @@ public class ObjectFactory {
         return new Drops();
     }
 
-    @XmlElementDecl(namespace = NAMESPACE_URL, name = "medicine")
+    @XmlElementDecl(
+            namespace = NAMESPACE_URL,
+            name = "medicine"
+    )
     public JAXBElement<Medicine> createMedicine(Medicine value) {
         return new JAXBElement<>(_Medicine_QNAME, Medicine.class, null, value);
     }
 
-    @XmlElementDecl(namespace = NAMESPACE_URL, name = "pills", substitutionHeadNamespace = NAMESPACE_URL,
-            substitutionHeadName = "medicine")
+    @XmlElementDecl(
+            namespace = NAMESPACE_URL,
+            name = "pills",
+            substitutionHeadNamespace = NAMESPACE_URL,
+            substitutionHeadName = "medicine"
+    )
     public JAXBElement<Pills> createPills(Pills value) {
         return new JAXBElement<>(_Pills_QNAME, Pills.class, null, value);
     }
 
-    @XmlElementDecl(namespace = NAMESPACE_URL, name = "drops", substitutionHeadNamespace = NAMESPACE_URL,
-            substitutionHeadName = "medicine")
+    @XmlElementDecl(
+            namespace = NAMESPACE_URL,
+            name = "drops",
+            substitutionHeadNamespace = NAMESPACE_URL,
+            substitutionHeadName = "medicine"
+    )
     public JAXBElement<Drops> createDrops(Drops value) {
         return new JAXBElement<>(_Drops_QNAME, Drops.class, null, value);
     }

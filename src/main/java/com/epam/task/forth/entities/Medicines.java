@@ -13,7 +13,8 @@ import java.util.List;
 @XmlRootElement(name = "medicines")
 public class Medicines {
 
-    @XmlElementRef(name = "medicine", namespace = "http://www.forth.task.epam.com/entities", type = JAXBElement.class)
+    @XmlElementRef(name = "medicine", namespace = "http://www.forth.task.epam.com/entities",
+            type = JAXBElement.class)
     protected List<JAXBElement<? extends Medicine>> medicine;
 
 

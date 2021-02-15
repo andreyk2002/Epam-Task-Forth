@@ -15,7 +15,8 @@ public class Drops extends Medicine {
     @XmlElement(name = "volume-milligrams")
     private double volumeMilligrams;
 
-    public Drops(String pharma, String name, MedicineGroup group, double price, double volumeMilligrams, String id) {
+    public Drops(String pharma, String name, MedicineGroup group,
+                 double price, double volumeMilligrams, String id) {
         super(pharma, price, id, name, group);
         this.volumeMilligrams = volumeMilligrams;
     }

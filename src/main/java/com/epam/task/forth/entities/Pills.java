@@ -12,7 +12,8 @@ public class Pills extends Medicine {
     private Integer quantity;
 
 
-    public Pills(String pharma, String name, MedicineGroup group, double price, Integer quantity, String id) {
+    public Pills(String pharma, String name, MedicineGroup group,
+                 double price, Integer quantity, String id) {
         super(pharma, price, id, name, group);
         this.quantity = quantity;
     }

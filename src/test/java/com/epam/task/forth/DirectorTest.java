@@ -23,9 +23,12 @@ import static org.mockito.Mockito.when;
 public class DirectorTest {
 
     private final static String FILE = "";
-    private final static Medicine FIRST_MEDICINE = new Pills("C", "A", MedicineGroup.BUD, 1, 1, "0");
-    private final static Medicine SECOND_MEDICINE = new Drops("B", "Name", MedicineGroup.BUD, 5, 1, "1");
-    private final static Medicine THIRD_MEDICINE = new Drops("A", "B", MedicineGroup.ANTIBIOTIC, 5, 5, "2");
+    private final static Medicine FIRST_MEDICINE =
+            new Pills("C", "A", MedicineGroup.BUD, 1, 1, "0");
+    private final static Medicine SECOND_MEDICINE =
+            new Drops("B", "Name", MedicineGroup.BUD, 5, 1, "1");
+    private final static Medicine THIRD_MEDICINE =
+            new Drops("A", "B", MedicineGroup.ANTIBIOTIC, 5, 5, "2");
     private Director director;
 
     @Test

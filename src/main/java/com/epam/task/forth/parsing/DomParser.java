@@ -38,11 +38,11 @@ public class DomParser implements Parser {
         return medicines;
     }
 
-    private List<Medicine> buildMedicines(String file, DocumentBuilder documentBuilder) throws IOException, SAXException {
-        Document document = documentBuilder.parse(file);
+    private List<Medicine> buildMedicines(String file, DocumentBuilder builder)
+            throws IOException, SAXException {
+        Document document = builder.parse(file);
         Element root = document.getDocumentElement();
 
-        //?
         NodeList dropsList = root.getElementsByTagName("drops");
         NodeList pillsList = root.getElementsByTagName("pills");
 

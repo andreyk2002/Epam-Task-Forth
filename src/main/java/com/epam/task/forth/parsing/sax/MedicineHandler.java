@@ -103,7 +103,10 @@ public class MedicineHandler extends DefaultHandler {
                     current.setVolumeMilligrams(volumeMilligrams);
                     break;
                 default:
-                    throw new EnumConstantNotPresentException(currentTag.getDeclaringClass(), currentTag.name());
+                    throw new EnumConstantNotPresentException(
+                            currentTag.getDeclaringClass(),
+                            currentTag.name()
+                    );
             }
         }
         currentTag = null;
