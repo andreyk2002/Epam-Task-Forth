@@ -5,11 +5,9 @@ import com.epam.task.forth.entities.Medicine;
 import com.epam.task.forth.entities.MedicineGroup;
 import com.epam.task.forth.entities.Pills;
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 
 public class MedicineHandler extends DefaultHandler {
@@ -17,14 +15,12 @@ public class MedicineHandler extends DefaultHandler {
     private final static String PILLS = "pills";
     private final static String DROPS = "drops";
     private final List<Medicine> medicines;
-    private final EnumSet<MedicineTags> tagsWithText;
-    private Medicine currentMedicine = null;
-    private MedicineTags currentTag;
+    private Medicine currentMedicine;
+    private MedicineTag currentTag;
 
 
     public MedicineHandler() {
         medicines = new ArrayList<>();
-        tagsWithText = EnumSet.range(MedicineTags.PHARMA, MedicineTags.VOLUME_MILLIGRAMS);
     }
 
     public List<Medicine> getMedicines() {
@@ -32,30 +28,18 @@ public class MedicineHandler extends DefaultHandler {
     }
 
     @Override
-    public void startDocument() throws SAXException {
-        super.startDocument();
-    }
-
-    @Override
-    public void endDocument() throws SAXException {
-        super.endDocument();
-    }
-
-    @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) {
         if (DROPS.equals(localName)) {
             currentMedicine = new Drops();
             if (attributes.getLength() == 3) {
-                setGroup(attributes);
+                int groupIndex = 2;
+                setGroup(attributes, groupIndex);
             }
         } else if (PILLS.equals(localName)) {
             currentMedicine = new Pills();
-            String quantityString = attributes.getValue(2);
-            int quantity = Integer.parseInt(quantityString);
-            ((Pills) currentMedicine).setQuantity(quantity);
-            if (attributes.getLength() == 4) {
-                setGroup(attributes);
-            }
+            int attributeIndex = 2;
+            String fieldName = attributes.getLocalName(attributeIndex);
+            setPillsFields(attributes, attributeIndex, fieldName);
         }
         if (PILLS.equals(localName) || DROPS.equals(localName)) {
             String id = attributes.getValue(0);
@@ -63,18 +47,8 @@ public class MedicineHandler extends DefaultHandler {
             String name = attributes.getValue(1);
             currentMedicine.setName(name);
         } else {
-            MedicineTags temp = MedicineTags.enumFromTag(localName.toUpperCase());
-            if (tagsWithText.contains(temp)) {
-                currentTag = temp;
-            }
+            currentTag = MedicineTag.getByTagName(localName);
         }
-    }
-
-    private void setGroup(Attributes attributes) {
-        String groupAttribute = attributes.getValue(2);
-        String groupAttributeUpper = groupAttribute.toUpperCase();
-        MedicineGroup group = Enum.valueOf(MedicineGroup.class, groupAttributeUpper);
-        currentMedicine.setGroup(group);
     }
 
     @Override
@@ -85,8 +59,8 @@ public class MedicineHandler extends DefaultHandler {
     }
 
     @Override
-    public void characters(char[] ch, int start, int length) {
-        String content = new String(ch, start, length).trim();
+    public void characters(char[] chars, int start, int length) {
+        String content = new String(chars, start, length).trim();
 
         if (currentTag != null) {
             switch (currentTag) {
@@ -102,14 +76,38 @@ public class MedicineHandler extends DefaultHandler {
                     Drops current = (Drops) currentMedicine;
                     current.setVolumeMilligrams(volumeMilligrams);
                     break;
-                default:
-                    throw new EnumConstantNotPresentException(
-                            currentTag.getDeclaringClass(),
-                            currentTag.name()
-                    );
             }
         }
         currentTag = null;
+    }
+
+    private void setPillsFields(Attributes attributes, int attributeIndex, String firstAdditionalAttribute) {
+
+        if (firstAdditionalAttribute.equals("quantity")) {
+            setQuantity(attributes, attributeIndex);
+            if (attributes.getLength() > 3) {
+                int groupIndex = 3;
+                setGroup(attributes, groupIndex);
+            }
+
+        } else {
+            int groupIndex = 2;
+            setGroup(attributes, groupIndex);
+            setQuantity(attributes, attributeIndex + 1);
+        }
+    }
+
+    private void setQuantity(Attributes attributes, int attributeIndex) {
+        String quantityString = attributes.getValue(attributeIndex);
+        int quantity = Integer.parseInt(quantityString);
+        ((Pills) currentMedicine).setQuantity(quantity);
+    }
+
+    private void setGroup(Attributes attributes, int groupIndex) {
+        String groupAttribute = attributes.getValue(groupIndex);
+        String groupAttributeUpper = groupAttribute.toUpperCase();
+        MedicineGroup group = Enum.valueOf(MedicineGroup.class, groupAttributeUpper);
+        currentMedicine.setGroup(group);
     }
 
 

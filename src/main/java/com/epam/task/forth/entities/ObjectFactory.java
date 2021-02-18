@@ -9,16 +9,12 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static String NAMESPACE_URL = "http://www.forth.task.epam.com/entities";
-    private final static QName _Medicine_QNAME = new QName(NAMESPACE_URL, "medicine");
-    private final static QName _Pills_QNAME = new QName(NAMESPACE_URL, "pills");
-    private final static QName _Drops_QNAME = new QName(NAMESPACE_URL, "drops");
+    private final static QName MEDICINE_QNAME = new QName(NAMESPACE_URL, "medicine");
+    private final static QName PILLS_QNAME = new QName(NAMESPACE_URL, "pills");
+    private final static QName DROPS_QNAME = new QName(NAMESPACE_URL, "drops");
 
 
     public ObjectFactory() {
-    }
-
-    public Medicine createMedicine() {
-        return new Medicine();
     }
 
     public Medicines createMedicines() {
@@ -38,7 +34,7 @@ public class ObjectFactory {
             name = "medicine"
     )
     public JAXBElement<Medicine> createMedicine(Medicine value) {
-        return new JAXBElement<>(_Medicine_QNAME, Medicine.class, null, value);
+        return new JAXBElement<>(MEDICINE_QNAME, Medicine.class, null, value);
     }
 
     @XmlElementDecl(
@@ -48,7 +44,7 @@ public class ObjectFactory {
             substitutionHeadName = "medicine"
     )
     public JAXBElement<Pills> createPills(Pills value) {
-        return new JAXBElement<>(_Pills_QNAME, Pills.class, null, value);
+        return new JAXBElement<>(PILLS_QNAME, Pills.class, null, value);
     }
 
     @XmlElementDecl(
@@ -58,7 +54,7 @@ public class ObjectFactory {
             substitutionHeadName = "medicine"
     )
     public JAXBElement<Drops> createDrops(Drops value) {
-        return new JAXBElement<>(_Drops_QNAME, Drops.class, null, value);
+        return new JAXBElement<>(DROPS_QNAME, Drops.class, null, value);
     }
 
 }

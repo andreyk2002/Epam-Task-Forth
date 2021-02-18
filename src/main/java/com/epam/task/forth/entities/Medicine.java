@@ -6,16 +6,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Objects;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Medicine", propOrder = {
-        "pharma",
-        "price"
-})
+@XmlType(name = "Medicine")
 @XmlSeeAlso({
         Drops.class,
         Pills.class
 })
 
-public class Medicine {
+public abstract class Medicine {
 
     @XmlElement(required = true)
     private String pharma;

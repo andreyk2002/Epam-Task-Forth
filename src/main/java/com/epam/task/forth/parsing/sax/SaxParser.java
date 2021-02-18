@@ -15,7 +15,6 @@ import java.util.List;
 public class SaxParser implements Parser {
     private final Logger LOGGER = LogManager.getLogger(SaxParser.class);
 
-
     @Override
     public List<Medicine> parse(String filename) throws ParserException {
         MedicineHandler handler = new MedicineHandler();

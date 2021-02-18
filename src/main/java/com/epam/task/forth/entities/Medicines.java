@@ -7,9 +7,6 @@ import java.util.List;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-        "medicine"
-})
 @XmlRootElement(name = "medicines")
 public class Medicines {
 

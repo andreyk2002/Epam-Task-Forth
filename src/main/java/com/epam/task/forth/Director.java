@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Director {
 
-    XmlValidator validator;
-    Parser parser;
+    private final XmlValidator validator;
+    private final Parser parser;
 
     public Director(XmlValidator validator, Parser parser) {
         this.validator = validator;

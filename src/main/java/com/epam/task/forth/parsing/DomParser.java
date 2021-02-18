@@ -23,7 +23,6 @@ public class DomParser implements Parser {
 
     private static final Logger LOGGER = LogManager.getLogger(DomParser.class);
 
-
     @Override
     public List<Medicine> parse(String file) throws ParserException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -77,18 +76,23 @@ public class DomParser implements Parser {
         String pharma = getElementTextContent(medicineElement, "pharma");
         medicine.setPharma(pharma);
 
-        //how to avoid
-        if (medicine instanceof Pills) {
-            Pills current = (Pills) medicine;
-            String quantityString = medicineElement.getAttribute("quantity");
-            int quantity = Integer.parseInt(quantityString);
-            current.setQuantity(quantity);
-            return medicine;
-        }
+        return (medicine instanceof Pills) ? buildPills(medicineElement, medicine) :
+                buildDrops(medicineElement,  medicine);
+    }
+
+    private Medicine buildDrops(Element medicineElement, Medicine medicine) {
         Drops current = (Drops) medicine;
         String volumeString = getElementTextContent(medicineElement, "volume-milligrams");
         double volume = Integer.parseInt(volumeString);
         current.setVolumeMilligrams(volume);
+        return current;
+    }
+
+    private Medicine buildPills(Element medicineElement, Medicine medicine) {
+        Pills current = (Pills) medicine;
+        String quantityString = medicineElement.getAttribute("quantity");
+        int quantity = Integer.parseInt(quantityString);
+        current.setQuantity(quantity);
         return medicine;
     }
 

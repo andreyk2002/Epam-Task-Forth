@@ -16,7 +16,7 @@ public class ParserFactory {
             case JAXB:
                 return new JaxbParser();
             default:
-                throw new NoSuchParserException("Parser of type" + type + " doesn't exist");
+                throw new NoSuchParserException("Parser of type: " + type + " doesn't exist");
         }
     }
 }

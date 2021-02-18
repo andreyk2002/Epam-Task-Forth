@@ -49,7 +49,8 @@ public abstract class ParserTest {
         List<Medicine> result = parser.parse(MULTI_ELEMENTS_FILE);
 
         //then
-        Assert.assertTrue(expected.size() == result.size() && expected.containsAll(result));
+        Assert.assertEquals(result.size(), expected.size());
+        Assert.assertTrue(expected.containsAll(result));
 
     }
 }

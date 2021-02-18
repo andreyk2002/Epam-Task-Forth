@@ -31,9 +31,7 @@ public class XmlValidator {
             Source xmlToValidate = new StreamSource(filename);
             validator.validate(xmlToValidate);
         } catch (SAXException e) {
-            //If file is invalid log
-            LOGGER.warn("Validation of file" + filename + "failed" +
-                    e.getMessage(), e);
+            LOGGER.warn("Validation of file" + filename + "failed" + e.getMessage(), e);
             return false;
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);

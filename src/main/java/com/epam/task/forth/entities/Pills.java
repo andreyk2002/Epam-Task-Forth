@@ -19,14 +19,11 @@ public class Pills extends Medicine {
     }
 
     public Pills() {
-
     }
-
 
     public Integer getQuantity() {
         return quantity;
     }
-
 
     public void setQuantity(Integer value) {
         this.quantity = value;
@@ -45,7 +42,6 @@ public class Pills extends Medicine {
         }
 
         Pills pills = (Pills) o;
-
         return Objects.equals(quantity, pills.quantity);
     }
 
