@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns:tns="http://www.forth.task.epam.com/entities"
+        version="1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.forth.task.epam.com/entities"
+        elementFormDefault="qualified">
+
+    <element name="medicines">
+        <complexType>
+            <sequence>
+                <element ref="tns:medicine"
+                         maxOccurs="unbounded"
+                />
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Medicine">
+        <sequence>
+            <element name="pharma">
+                <simpleType>
+                    <restriction base="string">
+                        <minLength value="2"/>
+                        <maxLength value="255"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="price">
+                <simpleType>
+                    <restriction base="double">
+                        <minInclusive value="0"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+        <attribute name="id" type="ID" use="required"/>
+        <attribute name="name" use="required">
+            <simpleType>
+                <restriction base="string">
+                    <minLength value="3"/>
+                    <maxLength value="255"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+        <!--        Added just to test optional-->
+        <attribute name="group" type="tns:MedicineGroup" default="antibiotic">
+        </attribute>
+    </complexType>
+    <simpleType name="MedicineGroup">
+        <restriction base="string">
+            <enumeration value="antibiotic"/>
+            <enumeration value="bud"/>
+            <enumeration value="painkiller"/>
+            <enumeration value="vitamin"/>
+        </restriction>
+    </simpleType>
+    <complexType name="Pills">
+        <complexContent>
+            <extension base="tns:Medicine">
+                <attribute name="quantity" type="positiveInteger" use="required"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="Drops">
+        <complexContent>
+            <extension base="tns:Medicine">
+                <sequence>
+                    <element name="volume-milligrams" type="double"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <element name="medicine" type="tns:Medicine" abstract="true"/>
+    <element name="pills" type="tns:Pills" substitutionGroup="tns:medicine"/>
+    <element name="drops" type="tns:Drops" substitutionGroup="tns:medicine"/>
+</schema>
